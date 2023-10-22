@@ -60,12 +60,7 @@ function base_install()
     ];
     '
 
-    # Das Trennzeichen für den Ersatzblock festlegen
-    delimiter_start='  boot.extraModulePackages = [ ];'
-    delimiter_end='  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking'
-
-    # Ersatz durchführen
-    sudo sed -i "/$delimiter_start/,/$delimiter_end/c$replacement_block" "$file_path"
+    awk -v var="$replacement_block" 'NR==14{print var} NR<14 || NR>24' $file_path
 }
 
 sudo loadkeys de-latin1-nodeadkeys
