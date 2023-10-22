@@ -51,7 +51,7 @@ function base_install()
     '
 
     # Suchen nach dem alten Block und ersetzen durch den neuen Block
-    sed -i "/fileSystems.\"\/\" = {/,/};/c $neuerBlock" "$datei"
+    sudo sed -i "/fileSystems.\"\/\" = {/,/};/c $neuerBlock" "$datei"
 
     echo "Block ersetzt."
 }
