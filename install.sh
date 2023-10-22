@@ -51,7 +51,7 @@ function base_install()
     '
 
     # Suchen nach dem alten Block und ersetzen durch den neuen Block
-    sudo sawk -v neuerBlock="$neuerBlock" "/$muster/{print neuerBlock; f=1} !/$muster{print} f{f=0}" "$datei" > temp && mv temp "$datei"
+    sudo awk -v neuerBlock="$neuerBlock" "/$muster/{print neuerBlock; f=1} !/$muster{print} f{f=0}" "$datei" > temp && mv temp "$datei"
 
     echo "Block ersetzt."
 }
