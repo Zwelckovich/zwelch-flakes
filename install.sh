@@ -49,10 +49,11 @@ function base_install()
         fsType = "ext4";
     };
     '
+    # Muster, um den alten Block in der Datei zu erkennen
+    muster='fileSystems."/" = \{[^}]*\};'
 
-    # Suchen nach dem alten Block und ersetzen durch den neuen Block
+    # Ersetze den alten Block durch den neuen Block
     sudo awk -v neuerBlock="$neuerBlock" "/$muster/{print neuerBlock; f=1} !/$muster{print} f{f=0}" "$datei" > temp && mv temp "$datei"
-
     echo "Block ersetzt."
 }
 
