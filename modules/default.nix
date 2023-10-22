@@ -5,6 +5,5 @@
     ./fonts.nix
     ./packages.nix
     ./pipewire.nix
-    ./nemo.nix
   ];
 }

@@ -5,6 +5,5 @@
     ./foot.nix
     ./neovim.nix
     ./hyprland.nix
-    ./waybar.nix
   ];
 }
