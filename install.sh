@@ -38,10 +38,34 @@ function base_install()
     sudo nixos-generate-config --root /mnt
     sudo cp -r ~/zwelch-flakes/ /mnt/.
     sudo cp  /mnt/etc/nixos/hardware-configuration.nix /mnt/zwelch-flakes/nixos/hardware-configuration.nix
-    lead="  boot.extraModulePackages = [ ];"
-    tail="  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking"
     
-    sudo sed -e "/$lead/,/$tail/!b//!d/$lead/r /mnt/zwelch-flakes/nixos/hardware_temp.txt" /mnt/zwelch-flakes/nixos/hardware-configuration.nix
+    file_path="/mnt/zwelch-flakes/nixos/hardware-configuration.nix"
+    replacement_block='
+    fileSystems."/" =
+        {
+        device = "/dev/disk/by-label/NIXTEST";
+        fsType = "ext4";
+        };
+
+    fileSystems."/boot" =
+        {
+        device = "/dev/disk/by-label/NIXBOOTest";
+        fsType = "vfat";
+        };
+
+    swapDevices = [
+        {
+        device = "/.swapfile";
+        }
+    ];
+    '
+
+    # Das Trennzeichen für den Ersatzblock festlegen
+    delimiter_start='boot.extraModulePackages = [ ];'
+    delimiter_end='# Enables DHCP on each ethernet and wireless interface. In case of scripted networking'
+
+    # Ersatz durchführen
+    sudo sed -i "/$delimiter_start/,/$delimiter_end/c$replacement_block" "$file_path"
 }
 
 sudo loadkeys de-latin1-nodeadkeys
