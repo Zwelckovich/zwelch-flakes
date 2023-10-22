@@ -15,9 +15,9 @@ function ext4_format ()
     sudo umount /dev/${disk}?*
     sudo umount -l /mnt
     sudo sgdisk --zap-all /dev/$disk
-    sudo sgdisk -n 1:0:+300M -n 2:0:0 -t 1:ef00 -t /dev/$disk -p
+    sudo sgdisk -n 1:0:+300M -n 2:0:0 -t 1:ef00 /dev/$disk -p
     dn=${disk}1
-    sudo mkfs.fat -F32 /dev/$dn
+    sudo mkfs.fat -F 32 /dev/$dn
     sudo fatlabel /dev/$dn NIXBOOT
     dn=${disk}2
     sudo mkfs.ext4 /dev/$dn -L NIXROOT
@@ -36,20 +36,24 @@ function base_install()
     echo "                                                 Base Installation                                                  "
     echo "------------------------------------------------------------------------------------------------------------------"
     sudo nixos-generate-config --root /mnt
+    sudo cp -r ~/zwelch-flakes/ /mnt/.
+    sudo cp  /mnt/etc/nixos/hardware-configuration.nix /mnt/zwelch-flakes/nixos/hardware-configuration.nix
+    # Die Datei, in der die Änderungen vorgenommen werden sollen
+    datei="/mnt/zwelch-flakes/nixos/hardware-configuration.nix"
 
+    # Der neue Block, den du einfügen möchtest
+    neuerBlock='
+    fileSystems."/" =
+    {
+        device = "/dev/disk/by-label/NIXROOT";
+        fsType = "ext4";
+    };
+    '
 
-    echo "#################"
-    echo "#SCRIPT FINISHED#"
-    echo "#################"
-    echo "Select Action:"
-    echo "  1)Shutdown"
-    echo "  2)Reboot"
-    read n
-    case $n in
-        1) shutdown now;;
-        2) reboot;;
-        *) echo "invalid option";;
-    esac
+    # Suchen nach dem alten Block und ersetzen durch den neuen Block
+    sed -i "/fileSystems.\"\/\" = {/,/};/c $neuerBlock" "$datei"
+
+    echo "Block ersetzt."
 }
 
 sudo loadkeys de-latin1-nodeadkeys
