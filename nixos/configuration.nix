@@ -31,15 +31,6 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
     ];
     # Configure your nixpkgs instance
     config = {
@@ -81,10 +72,7 @@
   users.users = {
     # FIXME: Replace with your username
     zwelch = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "miele";
+      initialPassword = "pw";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
