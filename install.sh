@@ -50,9 +50,11 @@ function base_installl()
         2) reboot;;
         *) echo "invalid option";;
     esac
+}
 
 function hyprland_install ()
 {
+    sudo loadkeys de-latin1-nodeadkeys
     clear
     echo -ne "
     ------------------------------------------------------------------------------------------------------------------
@@ -67,4 +69,4 @@ function hyprland_install ()
     sleep 2
     ext4_format
     base_config
-esac
+}
