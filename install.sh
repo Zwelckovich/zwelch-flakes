@@ -39,7 +39,11 @@ function base_install()
     sudo cp -r ~/zwelch-flakes/ /mnt/.
     sudo cp  /mnt/etc/nixos/hardware-configuration.nix /mnt/zwelch-flakes/nixos/hardware-configuration.nix
 
-    sudo sed -i -ne '/boot.extraModulePackages = [ ];/ {p; r /mnt/zwelch-flakes/hardware_temp.txt' -e ':a; n; / # Enables DHCP on each ethernet and wireless interface. In case of scripted networking/ {p; b}; ba}; p' /mnt/zwelch-flakes/nixos/hardware-configuration.nix
+    sudo sed '
+        /# Enables DHCP on each ethernet and wireless interface. In case of scripted networking/,$b
+        /boot.extraModulePackages = [ ];/r /mnt/zwelch-flakes/hardware_temp.txt
+        1,//!d
+    ' /mnt/zwelch-flakes/nixos/hardware-configuration.nix
 }
 
 sudo loadkeys de-latin1-nodeadkeys
