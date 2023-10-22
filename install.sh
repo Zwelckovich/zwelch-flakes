@@ -41,20 +41,7 @@ function base_install()
     # Die Datei, in der die Änderungen vorgenommen werden sollen
     datei="/mnt/zwelch-flakes/nixos/hardware-configuration.nix"
 
-    # Der neue Block, den du einfügen möchtest
-    neuerBlock='
-    fileSystems."/" =
-    {
-        device = "/dev/disk/by-label/NIXROOT";
-        fsType = "ext4";
-    };
-    '
-    # Muster, um den alten Block in der Datei zu erkennen
-    muster='fileSystems."/" = \{[^}]*\};'
-
-    # Ersetze den alten Block durch den neuen Block
-    sudo awk -v neuerBlock="$neuerBlock" "/$muster/{print neuerBlock; f=1} !/$muster{print} f{f=0}" "$datei" > temp && mv temp "$datei"
-    echo "Block ersetzt."
+    sudo sed -i -ne '/boot.extraModulePackages = [ ];/ {p; r /mnt/zwelch-flakes/nixos/hardware_temp.txt' -e ':a; n; / # Enables DHCP on each ethernet and wireless interface. In case of scripted networking/ {p; b}; ba}; p' /mnt/zwelch-flakes/nixos/hardware-configuration.nix
 }
 
 sudo loadkeys de-latin1-nodeadkeys
