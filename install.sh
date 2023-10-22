@@ -30,7 +30,7 @@ function ext4_format ()
     sudo swapon /mnt/.swapfile
 }
 
-function base_installl()
+function base_install()
 {
     echo "------------------------------------------------------------------------------------------------------------------"
     echo "                                                 Base Installation                                                  "
@@ -66,4 +66,4 @@ echo -ne "
 "
 sleep 2
 ext4_format
-base_config
+base_install
