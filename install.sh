@@ -59,9 +59,7 @@ function base_install()
         }
     ];
     '
-    pushd /mnt/zwelch-flakes/nixos/
-    awk -v var="$replacement_block" 'NR==14{print var} NR<14 || NR>24' hardware-configuration.nix
-    popd
+    awk -v var="$replacement_block" 'NR==14{print var} NR<14 || NR>24' $file_path
 }
 
 sudo loadkeys de-latin1-nodeadkeys
