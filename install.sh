@@ -59,7 +59,7 @@ function base_install()
         }
     ];
     '
-    awk -v var="$replacement_block" 'NR==14{print var} NR<14 || NR>24' $file_path > $file_path
+    sudo awk -v var="$replacement_block" 'NR==14{print var} NR<14 || NR>24' $file_path > $file_path
 }
 
 sudo loadkeys de-latin1-nodeadkeys
