@@ -22,7 +22,7 @@
     let
       inherit (self) outputs;
       system = "x86_64-linux";
-      pkgs-unstable = nixpkgs-stable.legacyPackages.${system};
+      pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
     in
     {
       # NixOS configuration entrypoint
