@@ -61,7 +61,9 @@ function base_install()
     sudo cp -r /home/nixos/zwelch-flakes /mnt/.
     sudo nix develop --extra-experimental-features nix-command --extra-experimental-features flakes
     sudo rm -rf /mnt/zwelch-flakes/.git
+    pushd /mnt/zwelch-flakes/
     sudo nixos-install --no-root-passwd --flake .#zwelchnix
+    popd
 }
 
 sudo loadkeys de-latin1-nodeadkeys
