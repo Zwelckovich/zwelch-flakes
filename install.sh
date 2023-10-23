@@ -36,8 +36,8 @@ function base_install()
     echo "                                                 Base Installation                                                  "
     echo "------------------------------------------------------------------------------------------------------------------"
     sudo nixos-generate-config --root /mnt
-    sudo cp  /mnt/etc/nixos/hardware-configuration.nix ~/zwelch-flakes/nixos/hardware-configuration.nix
     file_path="~/zwelch-flakes/nixos/hardware-configuration.nix"
+    sudo cp /mnt/etc/nixos/hardware-configuration.nix $file_path
     replacement_block='
     fileSystems."/" =
         {
