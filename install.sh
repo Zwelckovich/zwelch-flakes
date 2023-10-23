@@ -81,4 +81,3 @@ echo -ne "
 "
 sleep 2
 ext4_format
-base_install
