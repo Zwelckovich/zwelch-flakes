@@ -21,6 +21,7 @@
     } @ inputs:
     let
       inherit (self) outputs;
+      inherit system;
       pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
     in
     {
