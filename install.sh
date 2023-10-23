@@ -37,19 +37,19 @@ function base_install()
     echo "------------------------------------------------------------------------------------------------------------------"
     sudo nixos-generate-config --root /mnt
     sudo cp -r ~/zwelch-flakes/ /mnt/.
-    sudo cp  /mnt/etc/nixos/hardware-configuration.nix /mnt/zwelch-flakes/nixos/hardware-configuration.nix
+    sudo cp  /mnt/etc/nixos/hardware-configuration.nix ~/zwelch-flakes/nixos/hardware-configuration.nix
     
-    file_path="/mnt/zwelch-flakes/nixos/hardware-configuration.nix"
+    file_path="~/zwelch-flakes/nixos/hardware-configuration.nix"
     replacement_block='
     fileSystems."/" =
         {
-        device = "/dev/disk/by-label/NIXTEST";
+        device = "/dev/disk/by-label/NIXROOT";
         fsType = "ext4";
         };
 
     fileSystems."/boot" =
         {
-        device = "/dev/disk/by-label/NIXBOOTest";
+        device = "/dev/disk/by-label/NIXBOOT";
         fsType = "vfat";
         };
 
