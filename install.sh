@@ -57,7 +57,7 @@ function base_install()
         }
     ];
     '
-    sudo awk -v var="$replacement_block" 'NR==14{print var} NR<14 || NR>24' $file_path > $file_path
+    sudo bash -c "awk -v var="$replacement_block" 'NR==14{print var} NR<14 || NR>24' $file_path > $file_path"
     sudo cp -r /home/nixos/zwelch-flakes /mnt/.
 }
 
