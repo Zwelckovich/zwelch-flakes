@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 
 {
-   unstableTarball = fetchTarball
-    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
   # Booloader
   boot = {
     initrd = {
