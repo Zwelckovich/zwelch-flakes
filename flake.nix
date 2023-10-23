@@ -3,8 +3,8 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home manager
     #home-manager.url = "github:nix-community/home-manager";
@@ -18,11 +18,11 @@
     , nixpkgs-unstable
     , home-manager
     , ...
-    } @ inputs:
-    let
-      inherit (self) outputs;
-      inherit system;
-      pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+    }:
+    let 
+        system = "x86_64-linux";
+        pkgs = import nixpkgs {inherit system;}
+        unstable = import nixpkgs-unstable {inherit system;}
     in
     {
       # NixOS configuration entrypoint
@@ -30,7 +30,8 @@
       nixosConfigurations = {
         # FIXME replace with your hostname
         zwelchnix = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          inherit system;
+          specialArgs = { inherit unstable; };
           # > Our main nixos configuration file <
           modules = [ ./. ];
         };
