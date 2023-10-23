@@ -131,6 +131,7 @@
     qt6.qtwayland
     adwaita-qt
     adwaita-qt6
+    hyprland-share-picker
   ];
   # environment.systemPackages = with pkgs-unstable; [
   #   hyprland-share-picker

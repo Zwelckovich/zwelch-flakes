@@ -21,7 +21,7 @@
     } @ inputs:
     let
       inherit (self) outputs;
-      pkgs-stable = nixpkgs-stable.legacyPackages.${system};
+      pkgs-unstable = nixpkgs-stable.legacyPackages.${system};
     in
     {
       # NixOS configuration entrypoint
