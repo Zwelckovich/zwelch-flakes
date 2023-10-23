@@ -21,8 +21,8 @@
     }:
     let 
         system = "x86_64-linux";
-        pkgs = import nixpkgs {inherit system;}
-        unstable = import nixpkgs-unstable {inherit system;}
+        pkgs = import nixpkgs {inherit system;};
+        unstable = import nixpkgs-unstable {inherit system;};
     in
     {
       # NixOS configuration entrypoint
