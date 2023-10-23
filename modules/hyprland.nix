@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 {
   # Booloader
   boot = {
@@ -132,6 +132,9 @@
     adwaita-qt
     adwaita-qt6
   ];
+  # environment.systemPackages = with pkgs-unstable; [
+  #   hyprland-share-picker
+  # ];
 
   environment.sessionVariables = {
     POLKIT_AUTH_AGENT = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
