@@ -36,7 +36,6 @@ function base_install()
     echo "                                                 Base Installation                                                  "
     echo "------------------------------------------------------------------------------------------------------------------"
     sudo nixos-generate-config --root /mnt
-    sudo cp -r ~/zwelch-flakes/ /mnt/.
     sudo cp  /mnt/etc/nixos/hardware-configuration.nix ~/zwelch-flakes/nixos/hardware-configuration.nix
     
     file_path="~/zwelch-flakes/nixos/hardware-configuration.nix"
@@ -60,6 +59,7 @@ function base_install()
     ];
     '
     sudo awk -v var="$replacement_block" 'NR==14{print var} NR<14 || NR>24' $file_path > $file_path
+    sudo cp -r ~/zwelch-flakes/ /mnt/.
 }
 
 sudo loadkeys de-latin1-nodeadkeys
