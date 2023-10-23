@@ -1,9 +1,4 @@
 { config, pkgs, ... }:
-let
-  unstableTarball =
-    fetchTarball
-      https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
-in
 {
   # Booloader
   boot = {
@@ -101,17 +96,6 @@ in
         thunar-archive-plugin
         thunar-volman
       ];
-    };
-  };
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      packageOverrides = pkgs: {
-      	unstable = import unstableTarball {
-          config = config.nixpkgs.config;
-        };
-      };
     };
   };
 

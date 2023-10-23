@@ -2,7 +2,7 @@
 
 {
   fonts = {
-    enableDefaultPackages = false;
+    #enableDefaultPackages = false;
 
     packages = with pkgs; [
       noto-fonts
