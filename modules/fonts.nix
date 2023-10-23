@@ -1,12 +1,8 @@
 { pkgs, ... }:
 
 {
-  fonts = {
-    #enableDefaultPackages = false;
-
-    packages = with pkgs; [
+   environment.systemPackages = with pkgs; [
       noto-fonts
       nerdfonts
     ];
-  };
 }
