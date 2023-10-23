@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
-
+let
+  unstableTarball =
+    fetchTarball
+      https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
+in
 {
-  unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
   # Booloader
   boot = {
     initrd = {
@@ -104,6 +107,11 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
+      packageOverrides = pkgs: {
+      	unstable = import unstableTarball {
+          config = config.nixpkgs.config;
+        };
+      };
     };
   };
 
