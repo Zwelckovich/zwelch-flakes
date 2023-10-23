@@ -3,7 +3,6 @@
 
   inputs = {
     # Nixpkgs
-    #nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
 
     # Home manager
@@ -15,14 +14,11 @@
   outputs =
     { self
     , nixpkgs
-    #, nixpkgs-unstable
     , home-manager
     , ...
     } @ inputs:
     let
       inherit (self) outputs;
-      #system = "x86_64-linux";
-      #pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
     in
     {
       # NixOS configuration entrypoint
