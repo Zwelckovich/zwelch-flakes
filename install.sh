@@ -60,6 +60,7 @@ function base_install()
     sudo awk -v var="$replacement_block" 'NR==14{print var} NR<14 || NR>24' $file_path | sudo tee $file_path
     sudo cp -r /home/nixos/zwelch-flakes /mnt/.
     sudo nix develop --extra-experimental-features nix-command --extra-experimental-features flakes
+    sudo rm -rf /mnt/zwelch-flakes/.git
     sudo nixos-install --no-root-passwd --flake .#zwelchnix
 }
 
